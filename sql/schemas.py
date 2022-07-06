@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class CityBase(BaseModel):
-    title: str
+    name: str
 
 
 class CityCreate(CityBase):

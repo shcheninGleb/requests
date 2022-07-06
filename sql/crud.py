@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-import models
-import schemas
+from sql import models
+from sql import schemas
 
 
 def getCity(db: Session, skip: int = 0, limit: int = 100):
@@ -19,7 +19,7 @@ def createCity(db: Session, item: schemas.CityCreate):
 def updateCity(db: Session, id: schemas.City, title: schemas.CityBase):
     db_city = getCity(db=db)
     db_city.id = id
-    db_city.title = title
+    db_city.name = title
     db.commit()
     db.refresh(db_city)
     return db_city

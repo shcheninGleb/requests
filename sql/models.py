@@ -1,8 +1,8 @@
 from sqlalchemy import Column, String
-from database import Base
+from sql.database import Base
 
 
 class City(Base):
-    __tablename__ = "Cities"
-    id = Column(String, index=True)
-    title = Column(String, index=True)
+    __tablename__ = "city"
+    id = Column(String, primary_key=True)
+    name = Column(String)
