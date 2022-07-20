@@ -14,7 +14,8 @@ router = APIRouter(
 def create_city_api(
         item: schemas.CityCreate, db: Session = Depends(dependency.get_db)
 ):
-    return crud.create_city(db=db, item=item)
+    city = crud.create_city(db, item)
+    return {'id': city.id, 'name': city.name}
 
 
 @router.get("/list", response_model=List[schemas.City])

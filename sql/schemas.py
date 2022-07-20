@@ -5,12 +5,12 @@ class CityBase(BaseModel):
     name: str
 
 
-class CityCreate(CityBase):
-    pass
-
-
 class City(CityBase):
     id: str
+
+
+class CityCreate(City):
+    pass
 
 
 class Config:
