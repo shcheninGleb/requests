@@ -1,1 +1,1 @@
-from .db import getDb
+from .db import get_db
