@@ -1,14 +1,13 @@
 from sqlalchemy.orm import Session
-
 from sql import models
 from sql import schemas
 
 
-def getCity(db: Session, skip: int = 0, limit: int = 100):
+def get_city(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.City).offset(skip).limit(limit).all()
 
 
-def createCity(db: Session, item: schemas.CityCreate):
+def create_city(db: Session, item: schemas.CityCreate):
     db_city = models.City(**item.dict())
     db.add(db_city)
     db.commit()
@@ -16,16 +15,17 @@ def createCity(db: Session, item: schemas.CityCreate):
     return db_city
 
 
-def updateCity(db: Session, id: schemas.City, title: schemas.CityBase):
-    db_city = getCity(db=db)
+def update_city(db: Session, id: schemas.City, title: schemas.CityBase, updated_date: schemas.DateTimeModel):
+    db_city = get_city(db=db)
     db_city.id = id
     db_city.name = title
+    db_city.updated_date = updated_date
     db.commit()
     db.refresh(db_city)
     return db_city
 
 
-def deleteCity(db: Session):
-    db_city = getCity(db=db)
+def delete_city(db: Session):
+    db_city = get_city(db=db)
     db.delete(db_city)
     db.commit()

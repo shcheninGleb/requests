@@ -1,7 +1,7 @@
 from sql.database import SessionLocal
 
 
-def getDb():
+def get_db():
     try:
         db = SessionLocal()
         yield db

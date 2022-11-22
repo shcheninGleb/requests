@@ -11,15 +11,16 @@ router = APIRouter(
 
 
 @router.post("", response_model=schemas.City)
-def createCityApi(
-        item: schemas.CityCreate, db: Session = Depends(dependency.getDb)
+def create_city_api(
+        item: schemas.CityCreate, db: Session = Depends(dependency.get_db)
 ):
-    return crud.createCity(db=db, item=item)
+    city = crud.create_city(db, item)
+    return {'id': city.id, 'name': city.name, 'created date': city.created_date, 'updated date': city.updated_date}
 
 
 @router.get("/list", response_model=List[schemas.City])
-def readCities(
-        skip: int = 0, limit: int = 100, db: Session = Depends(dependency.getDb)
+def read_cities(
+        skip: int = 0, limit: int = 100, db: Session = Depends(dependency.get_db)
 ):
-    items = crud.getCity(db, skip=skip, limit=limit)
+    items = crud.get_city(db, skip=skip, limit=limit)
     return list(map(lambda i: {'id': i.id, 'name': i.name}, items))
