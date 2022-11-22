@@ -1,5 +1,4 @@
 from sqlalchemy.orm import Session
-
 from sql import models
 from sql import schemas
 
@@ -16,10 +15,11 @@ def create_city(db: Session, item: schemas.CityCreate):
     return db_city
 
 
-def update_city(db: Session, id: schemas.City, title: schemas.CityBase):
+def update_city(db: Session, id: schemas.City, title: schemas.CityBase, updated_date: schemas.DateTimeModel):
     db_city = get_city(db=db)
     db_city.id = id
     db_city.name = title
+    db_city.updated_date = updated_date
     db.commit()
     db.refresh(db_city)
     return db_city
